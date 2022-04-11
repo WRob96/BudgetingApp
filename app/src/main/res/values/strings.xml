@@ -1,0 +1,26 @@
+<resources>
+
+    <string name="app_name">Budgeting App</string>
+    <string name="home">Home</string>
+    <string name="details">Details</string>
+    <string name="hello_home_fragment">Hello Home!</string>
+    <string name="hello_details_fragment">Hello Details!</string>
+    <string name="hello_input_fragment">Hello Input!</string>
+    <string-array name="categories">
+        <item>Income</item>
+        <item>Housing</item>
+        <item>Food</item>
+        <item>Medical</item>
+        <item>Transportation</item>
+        <item>Life Insurance</item>
+        <item>Clothing</item>
+        <item>Child Care</item>
+        <item>Credit Cards</item>
+        <item>Loans</item>
+        <item>Personal</item>
+        <item>Recreation and Entertainment</item>
+        <item>Church and Charities</item>
+        <item>Gifts</item>
+        <item>Miscellaneous</item>
+    </string-array>
+</resources>
