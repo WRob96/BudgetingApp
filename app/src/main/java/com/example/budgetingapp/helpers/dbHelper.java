@@ -66,7 +66,13 @@ public class dbHelper extends SQLiteOpenHelper {
         }
     }
 
-    public void updateLine(BudgetLine line) {
+    void updateLine(BudgetLine line) {
+        SQLiteDatabase db = this.getWritableDatabase();
+        ContentValues cv = new ContentValues();
+        cv.put(COLUMN_DESCRIPTION, line.getDescription());
+        cv.put(COLUMN_CATEGORY, line.getCategory());
+        cv.put(COLUMN_DATE, line.getDate().toString());
+        cv.put(COLUMN_AMOUNT, line.getAmount().toString());
 
     }
     public void deleteLine(BudgetLine line) {

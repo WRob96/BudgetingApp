@@ -21,10 +21,15 @@
     <fragment
         android:id="@+id/inputFieldsFragment"
         android:name="com.example.budgetingapp.InputFieldsFragment"
-        android:label="fragment_input_fields"
+        android:label="@string/addNew"
         tools:layout="@layout/fragment_input_fields" >
         <action
             android:id="@+id/action_inputFieldsFragment_self"
             app:destination="@id/inputFieldsFragment" />
     </fragment><action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/>
+    <fragment
+        android:id="@+id/viewAllFragment"
+        android:name="com.example.budgetingapp.ViewAllFragment"
+        android:label="@string/viewAll"
+        tools:layout="@layout/fragment_view_all" />
 </navigation>

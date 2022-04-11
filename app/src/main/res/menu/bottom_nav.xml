@@ -6,4 +6,10 @@
     <item android:title="@string/details"
         android:icon="@drawable/details"
         android:id="@+id/detailsFragment"/>
+    <item android:title="View All"
+        android:id="@+id/viewAllFragment"
+        android:icon="@drawable/ic_view_all" />
+    <item android:title="Add New Transaction"
+        android:id="@+id/inputFieldsFragment"
+        android:icon="@drawable/ic_add_new" />
 </menu>

@@ -1,30 +1,19 @@
 package com.example.budgetingapp;
 
-import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.recyclerview.widget.RecyclerView;
 
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.Button;
-
-import com.example.budgetingapp.helpers.dbHelper;
-
-import java.math.BigDecimal;
-import java.sql.Date;
 
 /**
  * A simple {@link Fragment} subclass.
- * Use the {@link HomeFragment#newInstance} factory method to
+ * Use the {@link ViewAllFragment#newInstance} factory method to
  * create an instance of this fragment.
  */
-public class HomeFragment extends Fragment {
-
-    Context thisContext;
-    RecyclerView budgetRecView;
+public class ViewAllFragment extends Fragment {
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -35,7 +24,7 @@ public class HomeFragment extends Fragment {
     private String mParam1;
     private String mParam2;
 
-    public HomeFragment() {
+    public ViewAllFragment() {
         // Required empty public constructor
     }
 
@@ -45,11 +34,11 @@ public class HomeFragment extends Fragment {
      *
      * @param param1 Parameter 1.
      * @param param2 Parameter 2.
-     * @return A new instance of fragment HomeFragment.
+     * @return A new instance of fragment ViewAll.
      */
     // TODO: Rename and change types and number of parameters
-    public static HomeFragment newInstance(String param1, String param2) {
-        HomeFragment fragment = new HomeFragment();
+    public static ViewAllFragment newInstance(String param1, String param2) {
+        ViewAllFragment fragment = new ViewAllFragment();
         Bundle args = new Bundle();
         args.putString(ARG_PARAM1, param1);
         args.putString(ARG_PARAM2, param2);
@@ -69,10 +58,7 @@ public class HomeFragment extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Define view and context
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
-        thisContext = container.getContext();
-        return view;
-
+        // Inflate the layout for this fragment
+        return inflater.inflate(R.layout.fragment_view_all, container, false);
     }
 }
