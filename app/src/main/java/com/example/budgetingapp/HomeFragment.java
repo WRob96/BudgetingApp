@@ -10,6 +10,10 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.example.budgetingapp.models.BudgetLine;
+
+import java.util.ArrayList;
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link HomeFragment#newInstance} factory method to
@@ -19,6 +23,8 @@ public class HomeFragment extends Fragment {
 
     Context thisContext;
     RecyclerView budgetRecView;
+    ArrayList<BudgetLine> allTransactions;
+    MainActivity parentActivity = (MainActivity)getActivity();
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,12 +66,16 @@ public class HomeFragment extends Fragment {
         }
     }
 
+    void fetchHomeData() {
+        allTransactions = parentActivity.db.readAllData();
+    }
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Define view and context
         View view = inflater.inflate(R.layout.fragment_home, container, false);
         thisContext = container.getContext();
+        fetchHomeData();
         return view;
 
     }

@@ -78,7 +78,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public void deleteLine(BudgetLine line) {
 
     }
-    ArrayList<BudgetLine> readAllData() {
+    public ArrayList<BudgetLine> readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
@@ -93,7 +93,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT);
             toReturn = new ArrayList<>();
         }
-
+        Toast.makeText(context, "All data fetched", Toast.LENGTH_SHORT);
         return toReturn;
     }
 
