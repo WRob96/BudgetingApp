@@ -85,15 +85,16 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<BudgetLine> toReturn;
         if(db != null){
             cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
         }
         try {
             toReturn = parseCursor(cursor);
         } catch(ParseException e) {
             e.printStackTrace();
-            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT);
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();
             toReturn = new ArrayList<>();
         }
-        Toast.makeText(context, "All data fetched", Toast.LENGTH_SHORT);
+        Toast.makeText(context, "All data fetched", Toast.LENGTH_SHORT).show();
         return toReturn;
     }
 
@@ -107,8 +108,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 Date date;
                 BigDecimal amount;
                 // Format SQLite Date entry to Date object
-                SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-                    date = (Date)dateFormat.parse(cursor.getString(1));
+                    date = Date.valueOf(cursor.getString(1));
                 // Format SqLite Amount entry to BigDecimal
                     amount = new BigDecimal(cursor.getDouble(4));
                 // Add new line to budget ArrayList

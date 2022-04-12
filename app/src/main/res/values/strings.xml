@@ -8,11 +8,12 @@
     <string name="hello_home_fragment">Hello Home!</string>
     <string name="hello_details_fragment">Hello Details!</string>
     <string name="hello_input_fragment">Hello Input!</string>
-    <string name="income">Income</string>
-    <string name="debt">Debt</string>
-    <string name="bills">Bills</string>
-    <string name="savings">Savings</string>
-    <string name="investments">Investments</string>
+    <string name="income">Income: </string>
+    <string name="debt">Debt: </string>
+    <string name="bills">Bills: </string>
+    <string name="savings">Savings: </string>
+    <string name="investments">Investments: </string>
+    <string name="other">Other: </string>
     <string-array name="categories">
         <item>Income</item>
         <item>Housing</item>
@@ -28,6 +29,8 @@
         <item>Recreation and Entertainment</item>
         <item>Church and Charities</item>
         <item>Gifts</item>
+        <item>Savings</item>
+        <item>Investments</item>
         <item>Miscellaneous</item>
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->

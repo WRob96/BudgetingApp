@@ -8,6 +8,7 @@ import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
 
 import android.os.Bundle;
+import android.widget.Toast;
 
 import com.example.budgetingapp.databinding.ActivityMainBinding;
 import com.example.budgetingapp.helpers.DatabaseHelper;
@@ -31,7 +32,7 @@ public class MainActivity extends AppCompatActivity {
         setSupportActionBar(toolbar);
         BottomNavigationView navView = findViewById(R.id.bottom_navigation_view);
         AppBarConfiguration appBarConfiguration = new AppBarConfiguration.Builder(
-                R.id.homeFragment, R.id.detailsFragment)
+                R.id.homeFragment, R.id.detailsFragment, R.id.viewAllFragment, R.id.inputFieldsFragment)
                 .build();
         NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
         NavController navController = navHostFragment.getNavController();

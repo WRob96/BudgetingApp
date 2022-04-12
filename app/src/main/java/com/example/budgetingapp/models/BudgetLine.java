@@ -62,4 +62,23 @@ public class BudgetLine {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+    public String getCategoryType() {
+       if (category == "Income") {
+           return category;
+       }
+       if (category == "Credit Cards" || category == "Loans") {
+           return "Debt";
+       }
+       if (category == "Savings") {
+           return category;
+       }
+       if (category == "Investments") {
+           return category;
+       }
+       if (category == "Personal" || category == "Recreation and Entertainment" || category == "Church and Charities" || category == "Gifts" || category == "Miscellaneous") {
+           return "Other";
+       } else {
+           return "Bills";
+       }
+    }
 }
