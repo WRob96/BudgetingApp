@@ -17,7 +17,7 @@ import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
-public class dbHelper extends SQLiteOpenHelper {
+public class DatabaseHelper extends SQLiteOpenHelper {
 
     private Context context;
     private static final String DATABASE_NAME = "budget.db";
@@ -29,7 +29,7 @@ public class dbHelper extends SQLiteOpenHelper {
     private static final String COLUMN_CATEGORY = "category";
     private static final String COLUMN_DESCRIPTION = "description";
     private static final String COLUMN_AMOUNT = "amount";
-    public dbHelper(@Nullable Context context) {
+    public DatabaseHelper(@Nullable Context context) {
         super(context, DATABASE_NAME, null, DATABASE_VERSION);
         this.context = context;
     }

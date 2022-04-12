@@ -10,7 +10,11 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.Spinner;
+
+import java.math.BigDecimal;
+import java.sql.Date;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -66,7 +70,7 @@ public class InputFieldsFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_input_fields, container, false);
         Context context = container.getContext();
         // Create an ArrayAdapter using the string array and a default spinner layout
-        Spinner spinner = (Spinner) view.findViewById(R.id.spinner);
+        Spinner spinner = view.findViewById(R.id.spinner);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 context,
                 R.array.categories,
@@ -76,6 +80,13 @@ public class InputFieldsFragment extends Fragment {
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
+        Button submitButton = view.findViewById(R.id.button);
+        View.OnClickListener testFun = new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+            }
+        };
+        submitButton.setOnClickListener(testFun);
         // Return view
         return view;
     }
