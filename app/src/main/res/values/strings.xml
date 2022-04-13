@@ -4,6 +4,7 @@
     <string name="home">Home</string>
     <string name="details">Details</string>
     <string name="viewAll">View All</string>
+    <string name="newTransaction">New Transaction</string>
     <string name="addNew">Add New Transaction</string>
     <string name="hello_home_fragment">Hello Home!</string>
     <string name="hello_details_fragment">Hello Details!</string>
