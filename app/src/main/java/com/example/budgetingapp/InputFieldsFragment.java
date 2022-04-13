@@ -12,6 +12,8 @@ import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.Spinner;
+import android.widget.TextView;
+import android.widget.Toast;
 
 import java.math.BigDecimal;
 import java.sql.Date;
@@ -22,7 +24,6 @@ import java.sql.Date;
  * create an instance of this fragment.
  */
 public class InputFieldsFragment extends Fragment {
-
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
     private static final String ARG_PARAM1 = "param1";
@@ -71,6 +72,9 @@ public class InputFieldsFragment extends Fragment {
         Context context = container.getContext();
         // Create an ArrayAdapter using the string array and a default spinner layout
         Spinner spinner = view.findViewById(R.id.spinner);
+        TextView descriptionField = (TextView) view.findViewById(R.id.descriptionfield);
+        TextView amountInput = (TextView) view.findViewById(R.id.amountinput);
+        TextView dateInput = (TextView) view.findViewById(R.id.dateinputfield);
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
                 context,
                 R.array.categories,
@@ -81,12 +85,16 @@ public class InputFieldsFragment extends Fragment {
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
         Button submitButton = view.findViewById(R.id.button);
-        View.OnClickListener testFun = new View.OnClickListener() {
+        submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
+            public void onClick(View view) {
+                String descriptionValue = descriptionField.getText().toString();
+                String amountValue = amountInput.getText().toString();
+                String dateValue = dateInput.getText().toString();
+                String categoryValue = spinner.getSelectedItem().toString();
+                Toast.makeText(context, "Values: "+descriptionValue+amountValue+dateValue+categoryValue, Toast.LENGTH_SHORT).show();
             }
-        };
-        submitButton.setOnClickListener(testFun);
+        });
         // Return view
         return view;
     }

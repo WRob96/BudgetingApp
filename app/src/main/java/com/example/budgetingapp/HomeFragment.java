@@ -27,6 +27,7 @@ import java.util.ArrayList;
 public class HomeFragment extends Fragment {
 
     Context thisContext;
+    View view;
     RecyclerView budgetRecView;
     ArrayList<BudgetLine> allTransactions;
     BigDecimal income;
@@ -41,6 +42,7 @@ public class HomeFragment extends Fragment {
     TextView savingsView;
     TextView investmentsView;
     TextView otherView;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -81,6 +83,7 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
+
     void fetchHomeData() {
         allTransactions = ((MainActivity)getActivity()).db.readAllData();
         for (BudgetLine l : allTransactions) {
@@ -112,11 +115,12 @@ public class HomeFragment extends Fragment {
             other = other.setScale(2, RoundingMode.HALF_UP);
         }
     }
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Define view and context
-        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        view = inflater.inflate(R.layout.fragment_home, container, false);
         thisContext = container.getContext();
         income = new BigDecimal(0);
         bills = new BigDecimal(0);
@@ -125,6 +129,11 @@ public class HomeFragment extends Fragment {
         investments = new BigDecimal(0);
         other = new BigDecimal(0);
         fetchHomeData();
+        setData();
+        return view;
+    }
+
+    private void setData(){
         incomeView = (TextView)view.findViewById(R.id.incomeAmount);
         debtView = (TextView)view.findViewById(R.id.debtAmount);
         billsView = (TextView)view.findViewById(R.id.billsAmount);
@@ -137,7 +146,5 @@ public class HomeFragment extends Fragment {
         savingsView.setText(MessageFormat.format("${0}",savings.toString()));
         investmentsView.setText(MessageFormat.format("${0}",investments.toString()));
         otherView.setText(MessageFormat.format("${0}",other.toString()));
-        return view;
-
     }
 }

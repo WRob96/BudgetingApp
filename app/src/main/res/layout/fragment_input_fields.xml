@@ -14,27 +14,51 @@
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="test"
+            android:text="Create New Transaction"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/textInputLayout"
-            android:layout_width="match_parent"
+        <AutoCompleteTextView
+            android:id="@+id/descriptionfield"
+            android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:minHeight="48dp"
+            android:hint="Description"
+            app:layout_constraintBottom_toTopOf="@+id/button3"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_weight="0" />
-
-        </com.google.android.material.textfield.TextInputLayout>
+            app:layout_constraintTop_toTopOf="parent" />
+        <EditText
+            android:id="@+id/dateinputfield"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoText="true"
+            android:ems="10"
+            android:hint="Date"
+            android:inputType="date"
+            android:minHeight="48dp"
+            app:layout_constraintBottom_toTopOf="@+id/button3"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/descriptionfield" />
+        <EditText
+            android:id="@+id/amountinput"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:autoText="true"
+            android:ems="10"
+            android:hint="Amount"
+            android:inputType="number"
+            android:minHeight="48dp"
+            />
+        <Spinner
+            android:id="@+id/spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_weight="0"
+            tools:layout_editor_absoluteX="-51dp"
+            tools:layout_editor_absoluteY="66dp" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 
 </FrameLayout>

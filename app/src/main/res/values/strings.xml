@@ -14,6 +14,9 @@
     <string name="savings">Savings: </string>
     <string name="investments">Investments: </string>
     <string name="other">Other: </string>
+    <string name="date">Date</string>
+    <string name="description">Description</string>
+    <string name="amount">Amount</string>
     <string-array name="categories">
         <item>Income</item>
         <item>Housing</item>
@@ -35,5 +38,4 @@
     </string-array>
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
-    <string name="textview">TextView</string>
 </resources>
