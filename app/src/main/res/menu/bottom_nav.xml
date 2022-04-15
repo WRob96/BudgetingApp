@@ -1,15 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
-    <item android:title="@string/home"
-        android:icon="@drawable/home"
+    <item android:title="@string/ui_home"
+        android:icon="@drawable/ic_home"
         android:id="@+id/homeFragment"/>
-    <item android:title="@string/details"
-        android:icon="@drawable/details"
-        android:id="@+id/detailsFragment"/>
-    <item android:title="View All"
+    <item android:title="@string/ui_view_all"
         android:id="@+id/viewAllFragment"
         android:icon="@drawable/ic_view_all" />
-    <item android:title="Add New Transaction"
+    <item android:title="@string/ui_new_transaction"
         android:id="@+id/inputFieldsFragment"
         android:icon="@drawable/ic_add_new" />
 </menu>

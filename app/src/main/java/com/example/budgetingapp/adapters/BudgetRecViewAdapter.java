@@ -1,5 +1,6 @@
 package com.example.budgetingapp.adapters;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,14 +12,16 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.budgetingapp.R;
 import com.example.budgetingapp.models.BudgetLine;
 
+import java.math.RoundingMode;
+import java.text.MessageFormat;
 import java.util.ArrayList;
 
 /**
  * This class is a View Adapter for displaying budget items.
  */
-public class BudgetViewAdapter extends RecyclerView.Adapter<BudgetViewAdapter.ViewHolder> {
-    ArrayList<BudgetLine> budgetItems = new ArrayList<>();
-    public BudgetViewAdapter() {
+public class BudgetRecViewAdapter extends RecyclerView.Adapter<BudgetRecViewAdapter.ViewHolder> {
+    private ArrayList<BudgetLine> budgetItems = new ArrayList<>();
+    public BudgetRecViewAdapter() {
 
     }
 
@@ -28,7 +31,7 @@ public class BudgetViewAdapter extends RecyclerView.Adapter<BudgetViewAdapter.Vi
     @NonNull
     @Override
     public ViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.budget_line_item, parent, false);
+        View view = LayoutInflater.from(parent.getContext()).inflate(R.layout.budget_list_item, parent, false);
         ViewHolder holder = new ViewHolder(view);
         return holder;
     }
@@ -36,24 +39,23 @@ public class BudgetViewAdapter extends RecyclerView.Adapter<BudgetViewAdapter.Vi
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         BudgetLine budgetItem = budgetItems.get(position);
+        Log.d("debug", budgetItem.toString());
         holder.txtDate.setText(budgetItem.getDate().toString());
-        holder.txtCategory.setText(budgetItem.getCategory());
         holder.txtDescription.setText(budgetItem.getDescription());
-        holder.txtAmount.setText(budgetItem.getAmount().toString());
+        holder.txtAmount.setText(MessageFormat.format("${0}", budgetItem.getAmount().setScale(2, RoundingMode.HALF_UP).toString()));
     }
     public int getItemCount() {
         return budgetItems.size();
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
+
         private TextView txtDate;
-        private TextView txtCategory;
         private TextView txtDescription;
         private TextView txtAmount;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtDate = itemView.findViewById(R.id.txtDate);
-            txtCategory = itemView.findViewById(R.id.txtCategory);
             txtDescription = itemView.findViewById(R.id.txtDescription);
             txtAmount = itemView.findViewById(R.id.txtAmount);
         }

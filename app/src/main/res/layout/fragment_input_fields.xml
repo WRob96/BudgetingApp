@@ -9,13 +9,13 @@
     <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_padding="60dp">
+        >
 
         <Button
             android:id="@+id/button"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="Create New Transaction"
+            android:text="@string/addNew"
             tools:layout_editor_absoluteX="150dp"
             tools:layout_editor_absoluteY="623dp" />
 
@@ -26,7 +26,7 @@
             android:layout_marginTop="80dp"
             android:hint="Description"
             android:minHeight="48dp"
-            app:layout_constraintBottom_toTopOf="@+id/button3"
+            app:layout_constraintBottom_toTopOf="@+id/button"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
@@ -74,7 +74,7 @@
             android:layout_height="wrap_content"
             android:scaleX="3"
             android:scaleY="3"
-            android:text="@string/newTransaction"
+            android:text="@string/ui_new_transaction"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             tools:layout_editor_absoluteY="48dp" />

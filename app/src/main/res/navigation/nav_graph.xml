@@ -7,12 +7,12 @@
     <fragment
         android:id="@+id/homeFragment"
         android:name="com.example.budgetingapp.HomeFragment"
-        android:label="@string/home"
+        android:label="@string/ui_home"
         tools:layout="@layout/fragment_home" />
     <fragment
         android:id="@+id/detailsFragment"
         android:name="com.example.budgetingapp.DetailsFragment"
-        android:label="@string/details"
+        android:label="@string/ui_details"
         tools:layout="@layout/fragment_details" >
         <action
             android:id="@+id/action_detailsFragment_self"
@@ -30,6 +30,6 @@
     <fragment
         android:id="@+id/viewAllFragment"
         android:name="com.example.budgetingapp.ViewAllFragment"
-        android:label="@string/viewAll"
+        android:label="@string/ui_view_all"
         tools:layout="@layout/fragment_view_all" />
 </navigation>

@@ -64,6 +64,18 @@ public class BudgetLine {
     public void setAmount(BigDecimal amount) {
         this.amount = amount;
     }
+
+    @Override
+    public String toString() {
+        return "BudgetLine{" +
+                "id=" + id +
+                ", category='" + category + '\'' +
+                ", description='" + description + '\'' +
+                ", date=" + date +
+                ", amount=" + amount +
+                '}';
+    }
+
     public String getCategoryType() {
         CategoryType e = CategoryType.findByCategory(category);
         return e.getType();
