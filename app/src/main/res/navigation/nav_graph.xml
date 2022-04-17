@@ -22,7 +22,9 @@
         tools:layout="@layout/fragment_view_all" >
         <action
             android:id="@+id/action_edit_transaction"
-            app:destination="@id/editTransactionFragment" />
+            app:destination="@id/editTransactionFragment"
+            app:popUpTo="@id/viewAllFragment"
+            app:popUpToInclusive="true" />
     </fragment>
     <fragment
         android:id="@+id/editTransactionFragment"
