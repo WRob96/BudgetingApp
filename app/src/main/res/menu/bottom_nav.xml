@@ -2,11 +2,12 @@
 <menu xmlns:android="http://schemas.android.com/apk/res/android">
     <item android:title="@string/ui_home"
         android:icon="@drawable/ic_home"
-        android:id="@+id/homeFragment"/>
+        android:id="@+id/action_global_homeFragment"/>
     <item android:title="@string/ui_view_all"
-        android:id="@+id/viewAllFragment"
+        android:id="@+id/action_global_viewAllFragment"
         android:icon="@drawable/ic_view_all" />
     <item android:title="@string/ui_new_transaction"
-        android:id="@+id/inputFieldsFragment"
-        android:icon="@drawable/ic_add_new" />
+        android:id="@+id/action_global_inputFieldsFragment"
+        android:icon="@drawable/ic_add_new"
+        />
 </menu>
