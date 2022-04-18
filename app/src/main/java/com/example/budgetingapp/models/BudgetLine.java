@@ -9,16 +9,16 @@ public class BudgetLine {
     private int id;
     private String category;
     private String description;
-    private Date date;
-    private BigDecimal amount;
-   public BudgetLine(int id, Date date, String category, String description, BigDecimal amount) {
+    private String date;
+    private String amount;
+   public BudgetLine(int id, String date, String category, String description, String amount) {
     this.id = id;
     this.category = category;
     this.description = description;
     this.date = date;
     this.amount = amount;
    }
-    BudgetLine (Date date, String category, String description, BigDecimal amount) {
+    BudgetLine (String date, String category, String description, String amount) {
         this.category = category;
         this.description = description;
         this.date = date;
@@ -49,19 +49,19 @@ public class BudgetLine {
         this.description = description;
     }
 
-    public Date getDate() {
+    public String getDate() {
         return date;
     }
 
-    public void setDate(Date date) {
+    public void setDate(String date) {
         this.date = date;
     }
 
-    public BigDecimal getAmount() {
+    public String getAmount() {
         return amount;
     }
 
-    public void setAmount(BigDecimal amount) {
+    public void setAmount(String amount) {
         this.amount = amount;
     }
 

@@ -9,7 +9,17 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
+import android.widget.SimpleAdapter;
+import android.widget.TextView;
 import android.widget.Toast;
+
+import com.example.budgetingapp.models.BudgetLine;
+
+import java.util.ArrayList;
+import java.util.HashMap;
+import java.util.List;
+import java.util.Map;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -26,6 +36,7 @@ public class DetailsFragment extends Fragment {
     // TODO: Rename and change types of parameters
     private String mParam1;
     private String mParam2;
+
 
     public DetailsFragment() {
         // Required empty public constructor
@@ -62,7 +73,28 @@ public class DetailsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
 
+        getAllTransactions();
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_details, container, false);
+    }
+
+    private void getAllTransactions(){
+        ListView transactionsListView;
+        TextView infotext = (TextView) getActivity().findViewById(R.id.textView1);
+        transactionsListView = (ListView) getActivity().findViewById(R.id.transactionsListView);
+        //ArrayList<BudgetLine> transactionsData = ((MainActivity)getActivity()).db.readAllData();
+        List<HashMap<String, String>> transactionsData = ((MainActivity)getActivity()).db.printAllTransactionsToString();
+        if (transactionsData.size() !=0 ){
+
+            String[] databaseTextFields = new String[]{"date", "description", "amount"};
+            int[] viewTextFields = new int[]{R.id.textViewDATE, R.id.textViewDESCRIPTION, R.id.textViewDOLLAR_AMOUNT};
+            SimpleAdapter myCursorAdapter = new SimpleAdapter(getContext(), transactionsData,
+                    R.layout.listviewfields, databaseTextFields, viewTextFields);
+            transactionsListView.setAdapter(myCursorAdapter);
+
+        }
+        else {infotext.setText("There is no Data Here!");}
+
+
     }
 }

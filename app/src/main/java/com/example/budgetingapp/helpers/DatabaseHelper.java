@@ -16,6 +16,7 @@ import java.sql.Date;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.HashMap;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
 
@@ -51,7 +52,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
        db.execSQL("DROP TABLE IF EXISTS " + TABLE_NAME);
        onCreate(db);
     }
-        public void addLine(String category, String description, Date date, BigDecimal amount) {
+    /*This field adds a new record to the database*/
+    public void addLine(String category, String description, String date, String amount) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_DESCRIPTION, description);
@@ -105,16 +107,49 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<BudgetLine> parsedData = new ArrayList<>();
         if (cursor.getCount() != 0) {
             do {
-                Date date;
-                BigDecimal amount;
+                String date;
+                String amount;
                 // Format SQLite Date entry to Date object
-                    date = Date.valueOf(cursor.getString(1));
+                    date = String.valueOf(cursor.getString(1));
                 // Format SqLite Amount entry to BigDecimal
-                    amount = new BigDecimal(cursor.getDouble(4));
+                    amount = String.valueOf(cursor.getString(4));
                 // Add new line to budget ArrayList
                 parsedData.add(new BudgetLine(cursor.getInt(0), date, cursor.getString(2), cursor.getString(3), amount));
             } while (cursor.moveToNext());
         }
         return parsedData;
     }
+
+    /*I'm using this to pull all transactions*/
+    public ArrayList<HashMap<String, String>> printAllTransactionsToString(){
+        SQLiteDatabase the_db;
+        //print all transactions
+        ArrayList<HashMap<String, String>> transactionsList;
+
+        transactionsList = new ArrayList<>();
+
+
+        the_db = this.getWritableDatabase();
+        String selectQuery = "SELECT * FROM " + TABLE_NAME;
+        Cursor cursor = the_db.rawQuery(selectQuery,null);
+
+
+
+        if(cursor.moveToFirst()) {  //automatically move cursor to first row
+            do {
+                HashMap<String, String> map = new HashMap<>();
+
+                map.put("date", cursor.getString(0));   //move the cursor based on each index
+                map.put("description", cursor.getString(1));
+                map.put("amount", cursor.getString(2));
+                map.put("category", cursor.getString(3));
+
+                transactionsList.add(map);
+            }while (cursor.moveToNext());
+
+        }
+        return transactionsList; //return all data of dynamic list
+    }
+
+
 }

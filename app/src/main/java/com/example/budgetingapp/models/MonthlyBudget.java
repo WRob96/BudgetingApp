@@ -14,7 +14,7 @@ public class MonthlyBudget {
     public BigDecimal monthlyTotal() {
         BigDecimal total = new BigDecimal(0);
         for(BudgetLine l : budgetLines) {
-            total = total.add(l.getAmount());
+            total = total.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
         }
         total = total.setScale(2, RoundingMode.HALF_UP);
         return total;

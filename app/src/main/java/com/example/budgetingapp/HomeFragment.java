@@ -83,28 +83,30 @@ public class HomeFragment extends Fragment {
             mParam2 = getArguments().getString(ARG_PARAM2);
         }
     }
-
+   /*
+   * Read all data from the database. Loop through that data and separate it base on category.
+   * */
     void fetchHomeData() {
         allTransactions = ((MainActivity)getActivity()).db.readAllData();
         for (BudgetLine l : allTransactions) {
             switch(l.getCategoryType()) {
                 case "Income":
-                    income = income.add(l.getAmount());
+                    income = income.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
                     break;
                 case "Bills":
-                    bills = bills.add(l.getAmount());
+                    bills = bills.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
                     break;
                 case "Debt":
-                    debt = debt.add(l.getAmount());
+                    debt = debt.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
                     break;
                 case "Savings":
-                    savings = savings.add(l.getAmount());
+                    savings = savings.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
                     break;
                 case "Investments":
-                    investments = investments.add(l.getAmount());
+                    investments = investments.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
                     break;
                 case "Other":
-                    other = other.add(l.getAmount());
+                    other = other.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
                     break;
             }
             income = income.setScale(2, RoundingMode.HALF_UP);

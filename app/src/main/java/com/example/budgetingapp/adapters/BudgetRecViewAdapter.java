@@ -42,7 +42,7 @@ public class BudgetRecViewAdapter extends RecyclerView.Adapter<BudgetRecViewAdap
         Log.d("debug", budgetItem.toString());
         holder.txtDate.setText(budgetItem.getDate().toString());
         holder.txtDescription.setText(budgetItem.getDescription());
-        holder.txtAmount.setText(MessageFormat.format("${0}", budgetItem.getAmount().setScale(2, RoundingMode.HALF_UP).toString()));
+        holder.txtAmount.setText(MessageFormat.format("${0}", budgetItem.getAmount().toString()));
     }
     public int getItemCount() {
         return budgetItems.size();

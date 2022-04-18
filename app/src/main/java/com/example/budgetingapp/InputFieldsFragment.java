@@ -92,6 +92,7 @@ public class InputFieldsFragment extends Fragment {
                 String amountValue = amountInput.getText().toString();
                 String dateValue = dateInput.getText().toString();
                 String categoryValue = spinner.getSelectedItem().toString();
+                ((MainActivity)getActivity()).db.addLine(categoryValue,descriptionValue, dateValue,amountValue);
                 Toast.makeText(context, "Values: "+descriptionValue+amountValue+dateValue+categoryValue, Toast.LENGTH_SHORT).show();
             }
         });
