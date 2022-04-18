@@ -1,22 +1,32 @@
 package com.example.budgetingapp;
 
+import android.app.DatePickerDialog;
 import android.content.Context;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 
-import android.util.Log;
+import android.text.Editable;
+import android.text.InputType;
+import android.text.TextWatcher;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.google.android.material.datepicker.MaterialDatePicker;
+import com.google.android.material.datepicker.MaterialPickerOnPositiveButtonClickListener;
+import com.google.android.material.textfield.TextInputEditText;
+import com.google.android.material.textfield.TextInputLayout;
+
 import java.math.BigDecimal;
 import java.sql.Date;
+import java.text.NumberFormat;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -64,36 +74,94 @@ public class InputFieldsFragment extends Fragment {
         }
     }
 
+    // Declaring transaction variables
+    String category;
+    String description;
+    BigDecimal amount;
+    Long date;
+
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Define view and context
         View view = inflater.inflate(R.layout.fragment_input_fields, container, false);
         Context context = container.getContext();
-        // Create an ArrayAdapter using the string array and a default spinner layout
+
+        // Declaring Views
         Spinner spinner = view.findViewById(R.id.spinner);
-        TextView descriptionField = (TextView) view.findViewById(R.id.descriptionfield);
-        TextView amountInput = (TextView) view.findViewById(R.id.amountinput);
-        TextView dateInput = (TextView) view.findViewById(R.id.dateinputfield);
-        ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(
-                context,
-                R.array.categories,
-                android.R.layout.simple_spinner_item
-        );
+        TextView descriptionField = (TextView) view.findViewById(R.id.descriptionField);
+        TextInputLayout amountInput = (TextInputLayout) view.findViewById(R.id.amountInput);
+        TextInputLayout dateInput = (TextInputLayout) view.findViewById(R.id.dateInputField);
+        // Customizing Date Input behavior
+        dateInput.getEditText().setInputType(InputType.TYPE_NULL);
+        dateInput.getEditText().setKeyListener(null);
+        // Material Date Picker build
+        MaterialDatePicker<Long> datePicker = MaterialDatePicker.Builder.datePicker()
+                .setTitleText("Date of Transaction")
+                .build();
+        final String datePickerTag = "TRANSACTION_DATE";
+        // Setting Callback
+        View.OnClickListener callback = new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                datePicker.show(getChildFragmentManager(), datePickerTag);
+            }
+        };
+        // Setting On Click Listeners
+        dateInput.getEditText().setOnClickListener(callback);
+        // Listen on date change
+        datePicker.addOnPositiveButtonClickListener(new MaterialPickerOnPositiveButtonClickListener<Long>() {
+                                                        @Override
+                                                        public void onPositiveButtonClick(Long selection) {
+                                                            dateInput.getEditText().setText(datePicker.getHeaderText());
+                                                            date = selection;
+                                                        }
+                                                    });
+                ArrayAdapter < CharSequence > adapter = ArrayAdapter.createFromResource(
+                        context,
+                        R.array.categories,
+                        android.R.layout.simple_spinner_item
+                );
+        // Set behavior of amount field
+        EditText amountInputEdit = amountInput.getEditText();
+       amountInputEdit.addTextChangedListener(new TextWatcher() {
+            private String current;
+            @Override
+            public void beforeTextChanged(CharSequence charSequence, int i, int i1, int i2) {
+
+            }
+
+            @Override
+            public void onTextChanged(CharSequence s, int start, int before, int count) {
+                if(!s.toString().equals(current)){
+       amountInputEdit.removeTextChangedListener(this);
+                    String cleanString = s.toString().replaceAll("[$,.]", "");
+
+                    double parsed = Double.parseDouble(cleanString);
+                    String formatted = NumberFormat.getCurrencyInstance().format((parsed/100));
+
+                    current = formatted;
+       amountInputEdit.setText(formatted);
+       amountInputEdit.setSelection(formatted.length());
+       amountInputEdit.addTextChangedListener(this);
+                }
+            }
+
+            @Override
+            public void afterTextChanged(Editable editable) {
+
+            }
+        });
         // Specify the layout to use when the list of choices appears
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         // Apply the adapter to the spinner
         spinner.setAdapter(adapter);
-        Button submitButton = view.findViewById(R.id.button);
+        // Set onClickListener
+        Button submitButton = view.findViewById(R.id.addNewButton);
         submitButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                String descriptionValue = descriptionField.getText().toString();
-                String amountValue = amountInput.getText().toString();
-                String dateValue = dateInput.getText().toString();
-                String categoryValue = spinner.getSelectedItem().toString();
-                ((MainActivity)getActivity()).db.addLine(categoryValue,descriptionValue, dateValue,amountValue);
-                Toast.makeText(context, "Values: "+descriptionValue+amountValue+dateValue+categoryValue, Toast.LENGTH_SHORT).show();
+
             }
         });
         // Return view

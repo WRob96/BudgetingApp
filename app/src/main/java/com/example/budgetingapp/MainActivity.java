@@ -3,6 +3,7 @@ package com.example.budgetingapp;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.Toolbar;
 import androidx.navigation.NavController;
+import androidx.navigation.Navigation;
 import androidx.navigation.fragment.NavHostFragment;
 import androidx.navigation.ui.AppBarConfiguration;
 import androidx.navigation.ui.NavigationUI;
@@ -22,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
     private ActivityMainBinding binding;
     public MonthlyBudget currentBudget;
     public DatabaseHelper db;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -38,7 +40,21 @@ public class MainActivity extends AppCompatActivity {
         NavController navController = navHostFragment.getNavController();
         NavigationUI.setupActionBarWithNavController(this, navController, appBarConfiguration);
         NavigationUI.setupWithNavController(binding.bottomNavigationView, navController);
-        currentBudget = new MonthlyBudget(YearMonth.now());
+    }
+
+    /**
+     * Handles navigation upward back to fragment_view_all from fragment_edit_transaction
+     */
+    @Override
+    public boolean onSupportNavigateUp() {
+        NavHostFragment navHostFragment = (NavHostFragment) getSupportFragmentManager().findFragmentById(R.id.fragmentContainerView);
+        NavController navController = navHostFragment.getNavController();
+        if (navController.getCurrentDestination().getId() == R.id.editTransactionFragment){
+            Navigation.findNavController(this, R.id.fragmentContainerView).navigate(R.id.viewAllFragment);
+            return true;
+        } else {
+            return navController.navigateUp();
+        }
     }
 
 }

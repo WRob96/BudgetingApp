@@ -68,17 +68,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
     }
 
-    void updateLine(BudgetLine line) {
+    void updateRow(BudgetLine line) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_DESCRIPTION, line.getDescription());
         cv.put(COLUMN_CATEGORY, line.getCategory());
         cv.put(COLUMN_DATE, line.getDate().toString());
         cv.put(COLUMN_AMOUNT, line.getAmount().toString());
-
+        long result = db.update(TABLE_NAME, cv, "id=?", new String[]{String.valueOf(line.getId())});
+        if (result == -1) {
+            Toast.makeText(context, "Something went wrong...", Toast.LENGTH_SHORT).show();
+        } else {
+            Toast.makeText(context, "Transaction updated", Toast.LENGTH_SHORT).show();
+        }
     }
-    public void deleteLine(BudgetLine line) {
-
+    public void deleteRow(BudgetLine line) {
+       SQLiteDatabase db = this.getWritableDatabase();
+       long result = db.delete(TABLE_NAME, "id=?", new String[]{String.valueOf(line.getId())});
+       if (result == -1) {
+           Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
+       } else {
+           Toast.makeText(context, "Transaction deleted", Toast.LENGTH_SHORT).show();
+       }
     }
     public ArrayList<BudgetLine> readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -96,10 +107,28 @@ public class DatabaseHelper extends SQLiteOpenHelper {
             Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();
             toReturn = new ArrayList<>();
         }
-        Toast.makeText(context, "All data fetched", Toast.LENGTH_SHORT).show();
         return toReturn;
     }
+    public BudgetLine findById(int id) {
+        BudgetLine toReturn = null;
+        String query = "SELECT * FROM " + TABLE_NAME + "WHERE id = " + id;
+        SQLiteDatabase db = this.getReadableDatabase();
+        Cursor cursor = null;
+        if(db != null){
+            cursor = db.rawQuery(query, null);
+            cursor.moveToFirst();
+        }
+        try {
+            ArrayList<BudgetLine> parsedCursor = parseCursor(cursor);
+            toReturn = parsedCursor.get(0);
+        } catch(ParseException e) {
+            e.printStackTrace();
+            Toast.makeText(context, "Something went wrong!", Toast.LENGTH_SHORT).show();
+        }
+        return toReturn;
 
+
+    }
     /**
      * This method is used to parse cursor data into an array list to be used by the app
      */

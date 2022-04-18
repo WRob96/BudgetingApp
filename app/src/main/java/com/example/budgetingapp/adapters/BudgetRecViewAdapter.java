@@ -4,12 +4,18 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.LinearLayout;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.navigation.Navigation;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.example.budgetingapp.InputFieldsFragmentDirections;
 import com.example.budgetingapp.R;
+import com.example.budgetingapp.ViewAllFragmentDirections;
 import com.example.budgetingapp.models.BudgetLine;
 
 import java.math.RoundingMode;
@@ -39,10 +45,16 @@ public class BudgetRecViewAdapter extends RecyclerView.Adapter<BudgetRecViewAdap
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
         BudgetLine budgetItem = budgetItems.get(position);
-        Log.d("debug", budgetItem.toString());
         holder.txtDate.setText(budgetItem.getDate().toString());
         holder.txtDescription.setText(budgetItem.getDescription());
         holder.txtAmount.setText(MessageFormat.format("${0}", budgetItem.getAmount().toString()));
+        holder.parent.setOnClickListener(new View.OnClickListener(){
+            @Override
+            public void onClick(View v){
+                ViewAllFragmentDirections.ActionEditTransaction action = ViewAllFragmentDirections.actionEditTransaction(budgetItem.getId());
+                Navigation.findNavController(v).navigate(action);
+            }
+        });
     }
     public int getItemCount() {
         return budgetItems.size();
@@ -53,11 +65,13 @@ public class BudgetRecViewAdapter extends RecyclerView.Adapter<BudgetRecViewAdap
         private TextView txtDate;
         private TextView txtDescription;
         private TextView txtAmount;
+        private LinearLayout parent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
             txtDate = itemView.findViewById(R.id.txtDate);
             txtDescription = itemView.findViewById(R.id.txtDescription);
             txtAmount = itemView.findViewById(R.id.txtAmount);
+            parent = itemView.findViewById(R.id.parentLayout);
         }
     }
 

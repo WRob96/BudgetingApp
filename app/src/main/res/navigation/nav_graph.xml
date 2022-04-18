@@ -10,26 +10,33 @@
         android:label="@string/ui_home"
         tools:layout="@layout/fragment_home" />
     <fragment
-        android:id="@+id/detailsFragment"
-        android:name="com.example.budgetingapp.DetailsFragment"
-        android:label="@string/ui_details"
-        tools:layout="@layout/fragment_details" >
-        <action
-            android:id="@+id/action_detailsFragment_self"
-            app:destination="@id/detailsFragment" />
-    </fragment>
-    <fragment
         android:id="@+id/inputFieldsFragment"
         android:name="com.example.budgetingapp.InputFieldsFragment"
-        android:label="@string/addNew"
+        android:label="@string/add_new"
         tools:layout="@layout/fragment_input_fields" >
-        <action
-            android:id="@+id/action_inputFieldsFragment_self"
-            app:destination="@id/inputFieldsFragment" />
-    </fragment><action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/>
+    </fragment>
     <fragment
         android:id="@+id/viewAllFragment"
         android:name="com.example.budgetingapp.ViewAllFragment"
         android:label="@string/ui_view_all"
-        tools:layout="@layout/fragment_view_all" />
+        tools:layout="@layout/fragment_view_all" >
+        <action
+            android:id="@+id/action_edit_transaction"
+            app:destination="@id/editTransactionFragment"
+            app:popUpTo="@id/viewAllFragment"
+            app:popUpToInclusive="true" />
+    </fragment>
+    <fragment
+        android:id="@+id/editTransactionFragment"
+        android:name="com.example.budgetingapp.EditTransactionFragment"
+        android:label="@string/ui_edit_transaction"
+        tools:layout="@layout/fragment_edit_transaction" >
+        <argument
+            android:name="id"
+            app:argType="integer" />
+    </fragment>
+    <action android:id="@+id/action_global_homeFragment" app:destination="@id/homeFragment"/>
+    <action android:id="@+id/action_global_inputFieldsFragment" app:destination="@id/inputFieldsFragment"/>
+    <action android:id="@+id/action_global_viewAllFragment" app:destination="@id/viewAllFragment"/>
+
 </navigation>
