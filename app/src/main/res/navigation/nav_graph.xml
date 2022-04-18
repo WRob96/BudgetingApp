@@ -12,7 +12,7 @@
     <fragment
         android:id="@+id/inputFieldsFragment"
         android:name="com.example.budgetingapp.InputFieldsFragment"
-        android:label="@string/addNew"
+        android:label="@string/add_new"
         tools:layout="@layout/fragment_input_fields" >
     </fragment>
     <fragment
