@@ -25,13 +25,13 @@
         app:navGraph="@navigation/nav_graph"
         app:defaultNavHost="true" />
 
+
     <LinearLayout
         android:id="@+id/content2"
         android:layout_width="match_parent"
         android:layout_height="0dp"
         android:layout_weight="1"
         android:orientation="vertical">
-
     </LinearLayout>
 
     <com.google.android.material.bottomnavigation.BottomNavigationView
@@ -43,5 +43,4 @@
         app:itemIconTint="@color/material_dynamic_primary100"
         app:itemTextColor="@color/white"
         app:menu="@menu/bottom_nav" />
-
-    </LinearLayout>
+</LinearLayout>

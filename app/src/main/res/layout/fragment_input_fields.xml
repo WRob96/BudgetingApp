@@ -49,6 +49,7 @@
                 android:id="@+id/dateInputField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:background="@color/white"
                 android:layout_marginTop="24dp"
                 app:layout_constraintEnd_toEndOf="@+id/descriptionField"
                 app:layout_constraintStart_toStartOf="@+id/descriptionField"
@@ -95,6 +96,7 @@
                 android:inputType="numberDecimal"
                 android:hint="@string/amount"
                 app:placeholderText="@string/zero_amount"
+                app:boxBackgroundColor="@color/white"
                 app:layout_constraintEnd_toEndOf="@+id/dateInputField"
                 app:layout_constraintStart_toStartOf="@+id/dateInputField"
                 app:layout_constraintTop_toBottomOf="@+id/dateInputField">
