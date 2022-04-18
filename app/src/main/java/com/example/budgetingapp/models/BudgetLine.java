@@ -1,12 +1,6 @@
 package com.example.budgetingapp.models;
 
-import android.os.Parcel;
-import android.os.Parcelable;
-
 import com.example.budgetingapp.enums.CategoryType;
-
-import java.math.BigDecimal;
-import java.sql.Date;
 
 public class BudgetLine {
     private int id;
