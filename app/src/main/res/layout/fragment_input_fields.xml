@@ -11,7 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_centerHorizontal="true"
-        android:layout_margin="10dp"
+        android:layout_margin="30dp"
         android:layout_marginHorizontal="10dp"
         android:layout_marginVertical="10dp"
         android:layout_marginStart="10dp"
@@ -21,26 +21,48 @@
         android:layout_marginRight="10dp"
         android:layout_marginBottom="10dp"
         android:stretchColumns="0,1,2">
-
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent">
-
-            <Spinner
-                android:id="@+id/spinner"
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/categoryInputField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="0"
-                android:background="@color/white"
-                android:contentDescription="@string/bills"
-                android:minHeight="48dp"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="1.0"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/dateinputfield" />
+                style="@style/Widget.Material3.TextInputLayout.FilledBox.ExposedDropdownMenu"
+                app:startIconDrawable="@drawable/ic_category"
+                app:boxBackgroundColor="@color/white"
+                android:layout_marginTop="24dp"
+                android:hint="@string/categories"
+                >
+                <AutoCompleteTextView
+                    android:id="@+id/categoryAutoComplete"
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:inputType="none" />
+            </com.google.android.material.textfield.TextInputLayout>
         </TableRow>
-
+        <TableRow
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <com.google.android.material.textfield.TextInputLayout
+                android:id="@+id/descriptionField"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                app:boxBackgroundColor="@color/white"
+                app:startIconDrawable="@drawable/ic_description"
+                android:layout_marginTop="36dp"
+                app:counterEnabled="true"
+                app:counterMaxLength="20"
+                app:counterTextAppearance="@style/CounterStyle"
+                app:counterTextColor="@color/orange"
+                android:hint="@string/description">
+                <com.google.android.material.textfield.TextInputEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="text"/>
+            </com.google.android.material.textfield.TextInputLayout>
+        </TableRow>
         <TableRow
             android:layout_width="match_parent"
             android:layout_height="match_parent"
@@ -49,40 +71,19 @@
                 android:id="@+id/dateInputField"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:background="@color/white"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
+                app:boxBackgroundColor="@color/white"
+                app:startIconDrawable="@drawable/ic_calendar"
                 android:layout_marginTop="24dp"
-                app:layout_constraintEnd_toEndOf="@+id/descriptionField"
-                app:layout_constraintStart_toStartOf="@+id/descriptionField"
-                app:layout_constraintTop_toBottomOf="@+id/descriptionField"
                 android:hint="@string/date"
                 >
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:focusable="false" />
+                    />
             </com.google.android.material.textfield.TextInputLayout>
         </TableRow>
 
-        <TableRow
-            android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <AutoCompleteTextView
-                android:id="@+id/descriptionfield"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="10dp"
-                android:background="@color/white"
-                android:hint="Description"
-                android:minHeight="48dp"
-                android:textColor="@color/black"
-                app:layout_constraintBottom_toTopOf="@+id/button"
-                app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintHorizontal_bias="0.415"
-                app:layout_constraintStart_toStartOf="parent"
-                app:layout_constraintTop_toBottomOf="@+id/amountinput" />
-
-        </TableRow>
 
 
         <TableRow
@@ -92,14 +93,13 @@
                 android:id="@+id/amountInput"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="36dp"
                 android:inputType="numberDecimal"
                 android:hint="@string/amount"
                 app:placeholderText="@string/zero_amount"
+                style="@style/Widget.Material3.TextInputLayout.FilledBox"
                 app:boxBackgroundColor="@color/white"
-                app:layout_constraintEnd_toEndOf="@+id/dateInputField"
-                app:layout_constraintStart_toStartOf="@+id/dateInputField"
-                app:layout_constraintTop_toBottomOf="@+id/dateInputField">
+                app:startIconDrawable="@drawable/ic_money">
                 <com.google.android.material.textfield.TextInputEditText
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -115,12 +115,11 @@
             <Button
                 android:id="@+id/addNewButton"
                 android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="24dp"
+                android:layout_marginTop="48dp"
+                android:textStyle="bold"
+                android:textSize="18sp"
                 android:text="@string/add_new"
-                app:layout_constraintEnd_toEndOf="@+id/amountInput"
-                app:layout_constraintStart_toStartOf="@+id/amountInput"
-                app:layout_constraintTop_toBottomOf="@+id/amountInput" />
+                />
         </TableRow>
 
     </TableLayout>

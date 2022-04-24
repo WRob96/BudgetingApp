@@ -16,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.example.budgetingapp.InputFieldsFragmentDirections;
 import com.example.budgetingapp.R;
 import com.example.budgetingapp.ViewAllFragmentDirections;
+import com.example.budgetingapp.helpers.CurrencyHelper;
 import com.example.budgetingapp.models.BudgetLine;
 
 import java.math.RoundingMode;
@@ -44,30 +45,44 @@ public class BudgetRecViewAdapter extends RecyclerView.Adapter<BudgetRecViewAdap
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        BudgetLine budgetItem = budgetItems.get(position);
-        holder.txtDate.setText(budgetItem.getDate().toString());
-        holder.txtDescription.setText(budgetItem.getDescription());
-        holder.txtAmount.setText(MessageFormat.format("${0}", budgetItem.getAmount().toString()));
-        holder.parent.setOnClickListener(new View.OnClickListener(){
-            @Override
-            public void onClick(View v){
-                ViewAllFragmentDirections.ActionEditTransaction action = ViewAllFragmentDirections.actionEditTransaction(budgetItem.getId());
-                Navigation.findNavController(v).navigate(action);
-            }
-        });
+        int rowPos = holder.getAdapterPosition();
+        if (rowPos == 0) {
+            holder.txtDate.setBackgroundResource(R.drawable.bg_table_header);
+            holder.txtDescription.setBackgroundResource(R.drawable.bg_table_header);
+            holder.txtAmount.setBackgroundResource(R.drawable.bg_table_header);
+            holder.txtDate.setTextColor(holder.view.getResources().getColor(R.color.white));
+            holder.txtDescription.setTextColor(holder.view.getResources().getColor(R.color.white));
+            holder.txtAmount.setTextColor(holder.view.getResources().getColor(R.color.white));
+        } else {
+
+            BudgetLine budgetItem = budgetItems.get(position-1);
+            holder.txtDate.setText(budgetItem.getTableFormatDate());
+            holder.txtDescription.setText(budgetItem.getDescription());
+            holder.txtAmount.setText(CurrencyHelper.convertToFormatted(budgetItem.getAmount()));
+            holder.parent.setOnClickListener(new View.OnClickListener(){
+                @Override
+                public void onClick(View v){
+                    ViewAllFragmentDirections.ActionEditTransaction action = ViewAllFragmentDirections.actionEditTransaction(budgetItem.getId());
+                    Navigation.findNavController(v).navigate(action);
+                }
+            });
+
+        }
     }
     public int getItemCount() {
-        return budgetItems.size();
+        return budgetItems.size() + 1; // +1 to add a header
+
     }
 
     public class ViewHolder extends RecyclerView.ViewHolder{
-
+        private View view;
         private TextView txtDate;
         private TextView txtDescription;
         private TextView txtAmount;
         private LinearLayout parent;
         public ViewHolder(@NonNull View itemView) {
             super(itemView);
+            view = itemView;
             txtDate = itemView.findViewById(R.id.txtDate);
             txtDescription = itemView.findViewById(R.id.txtDescription);
             txtAmount = itemView.findViewById(R.id.txtAmount);

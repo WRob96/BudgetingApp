@@ -12,12 +12,14 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import com.example.budgetingapp.helpers.CurrencyHelper;
 import com.example.budgetingapp.models.BudgetLine;
 
 import java.math.BigDecimal;
 import java.math.RoundingMode;
 import java.text.MessageFormat;
 import java.util.ArrayList;
+import java.util.Currency;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -28,7 +30,6 @@ public class HomeFragment extends Fragment {
 
     Context thisContext;
     View view;
-    RecyclerView budgetRecView;
     ArrayList<BudgetLine> allTransactions;
     BigDecimal income;
     BigDecimal bills;
@@ -91,22 +92,22 @@ public class HomeFragment extends Fragment {
         for (BudgetLine l : allTransactions) {
             switch(l.getCategoryType()) {
                 case "Income":
-                    income = income.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
+                    income = income.add((l.getAmount()));
                     break;
                 case "Bills":
-                    bills = bills.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
+                    bills = bills.add((l.getAmount()));
                     break;
                 case "Debt":
-                    debt = debt.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
+                    debt = debt.add(l.getAmount());
                     break;
                 case "Savings":
-                    savings = savings.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
+                    savings = savings.add(l.getAmount());
                     break;
                 case "Investments":
-                    investments = investments.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
+                    investments = investments.add(l.getAmount());
                     break;
                 case "Other":
-                    other = other.add(BigDecimal.valueOf(Double.valueOf(l.getAmount())));
+                    other = other.add(l.getAmount());
                     break;
             }
             income = income.setScale(2, RoundingMode.HALF_UP);
@@ -142,11 +143,11 @@ public class HomeFragment extends Fragment {
         savingsView = (TextView)view.findViewById(R.id.savingsAmount);
         investmentsView = (TextView)view.findViewById(R.id.investmentsAmount);
         otherView = (TextView)view.findViewById(R.id.otherAmount);
-        incomeView.setText(MessageFormat.format("${0}",income.toString()));
-        debtView.setText(MessageFormat.format("${0}",debt.toString()));
-        billsView.setText(MessageFormat.format("${0}",bills.toString()));
-        savingsView.setText(MessageFormat.format("${0}",savings.toString()));
-        investmentsView.setText(MessageFormat.format("${0}",investments.toString()));
-        otherView.setText(MessageFormat.format("${0}",other.toString()));
+        incomeView.setText(CurrencyHelper.convertToFormatted(income));
+        debtView.setText(CurrencyHelper.convertToFormatted(debt));
+        billsView.setText(CurrencyHelper.convertToFormatted(bills));
+        savingsView.setText(CurrencyHelper.convertToFormatted(savings));
+        investmentsView.setText(CurrencyHelper.convertToFormatted(investments));
+        otherView.setText(CurrencyHelper.convertToFormatted(other));
     }
 }

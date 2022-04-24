@@ -40,7 +40,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         String query =
                 "CREATE TABLE " + TABLE_NAME +
                         " (" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
-                        COLUMN_DATE + " TEXT, " +
+                        COLUMN_DATE + " INTEGER, " +
                         COLUMN_CATEGORY + " TEXT, " +
                         COLUMN_DESCRIPTION + " TEXT, " +
                         COLUMN_AMOUNT + " REAL);";
@@ -53,43 +53,31 @@ public class DatabaseHelper extends SQLiteOpenHelper {
        onCreate(db);
     }
     /*This field adds a new record to the database*/
-    public void addLine(String category, String description, String date, String amount) {
+    public long addLine(String category, String description, long date, String amount) throws ParseException {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_DESCRIPTION, description);
         cv.put(COLUMN_CATEGORY, category);
-        cv.put(COLUMN_DATE, date.toString());
-        cv.put(COLUMN_AMOUNT, amount.toString());
+        cv.put(COLUMN_DATE, date);
+        cv.put(COLUMN_AMOUNT, String.valueOf(CurrencyHelper.convertFromFormatted(amount)));
         long result = db.insert(TABLE_NAME, null, cv);
-        if (result == -1) {
-            Toast.makeText(context, "Something went wrong...", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Budget line added", Toast.LENGTH_SHORT).show();
-        }
+        return result;
+
     }
 
-    void updateRow(BudgetLine line) {
+    public long updateRow(BudgetLine line) {
         SQLiteDatabase db = this.getWritableDatabase();
         ContentValues cv = new ContentValues();
         cv.put(COLUMN_DESCRIPTION, line.getDescription());
         cv.put(COLUMN_CATEGORY, line.getCategory());
-        cv.put(COLUMN_DATE, line.getDate().toString());
+        cv.put(COLUMN_DATE, line.getDate());
         cv.put(COLUMN_AMOUNT, line.getAmount().toString());
-        long result = db.update(TABLE_NAME, cv, "id=?", new String[]{String.valueOf(line.getId())});
-        if (result == -1) {
-            Toast.makeText(context, "Something went wrong...", Toast.LENGTH_SHORT).show();
-        } else {
-            Toast.makeText(context, "Transaction updated", Toast.LENGTH_SHORT).show();
-        }
+        return db.update(TABLE_NAME, cv, "id=?", new String[]{String.valueOf(line.getId())});
     }
-    public void deleteRow(BudgetLine line) {
+    public long deleteRow(BudgetLine line) {
        SQLiteDatabase db = this.getWritableDatabase();
        long result = db.delete(TABLE_NAME, "id=?", new String[]{String.valueOf(line.getId())});
-       if (result == -1) {
-           Toast.makeText(context, "Something went wrong", Toast.LENGTH_SHORT).show();
-       } else {
-           Toast.makeText(context, "Transaction deleted", Toast.LENGTH_SHORT).show();
-       }
+       return result;
     }
     public ArrayList<BudgetLine> readAllData() {
         String query = "SELECT * FROM " + TABLE_NAME;
@@ -111,7 +99,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     }
     public BudgetLine findById(int id) {
         BudgetLine toReturn = null;
-        String query = "SELECT * FROM " + TABLE_NAME + "WHERE id = " + id;
+        String query = "SELECT * FROM " + TABLE_NAME + " WHERE id = " + id;
         SQLiteDatabase db = this.getReadableDatabase();
         Cursor cursor = null;
         if(db != null){
@@ -136,20 +124,17 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         ArrayList<BudgetLine> parsedData = new ArrayList<>();
         if (cursor.getCount() != 0) {
             do {
-                String date;
-                String amount;
-                // Format SQLite Date entry to Date object
-                    date = String.valueOf(cursor.getString(1));
-                // Format SqLite Amount entry to BigDecimal
-                    amount = String.valueOf(cursor.getString(4));
                 // Add new line to budget ArrayList
-                parsedData.add(new BudgetLine(cursor.getInt(0), date, cursor.getString(2), cursor.getString(3), amount));
+                parsedData.add(new BudgetLine(cursor.getInt(0), cursor.getLong(1), cursor.getString(2), cursor.getString(3), cursor.getDouble(4)));
             } while (cursor.moveToNext());
         }
         return parsedData;
     }
 
-    /*I'm using this to pull all transactions*/
+    /*
+    * Unused right now?
+    *
+    * */
     public ArrayList<HashMap<String, String>> printAllTransactionsToString(){
         SQLiteDatabase the_db;
         //print all transactions

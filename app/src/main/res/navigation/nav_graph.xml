@@ -18,11 +18,16 @@
     <fragment
         android:id="@+id/viewAllFragment"
         android:name="com.example.budgetingapp.ViewAllFragment"
-        android:label="@string/ui_view_all"
+        android:label="@string/ui_all_transactions"
         tools:layout="@layout/fragment_view_all" >
         <action
             android:id="@+id/action_edit_transaction"
             app:destination="@id/editTransactionFragment"
+            app:popUpTo="@id/viewAllFragment"
+            app:popUpToInclusive="true" />
+        <action
+            android:id="@+id/action_viewAllFragment_self"
+            app:destination="@id/viewAllFragment"
             app:popUpTo="@id/viewAllFragment"
             app:popUpToInclusive="true" />
     </fragment>

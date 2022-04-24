@@ -27,4 +27,7 @@
         <item name="boxCornerRadiusTopEnd">3dp</item>
         <item name="boxCornerRadiusTopStart">3dp</item>
     </style>
+    <style name="CounterStyle" parent="TextAppearance.AppCompat.Small">
+        <item name="android:textStyle">bold</item>
+    </style>
 </resources>

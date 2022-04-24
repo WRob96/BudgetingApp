@@ -1,34 +1,47 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:layout_width="match_parent"
+    android:layout_width="wrap_content"
     android:layout_height="wrap_content"
-    android:layout_marginLeft="50dp"
-    android:layout_marginTop="10dp"
-    android:layout_marginRight="50dp"
-    android:layout_marginBottom="10dp"
-    android:background="@color/white"
-    android:padding="10dp"
+    android:orientation="horizontal"
+    android:gravity="center_horizontal"
+    android:layout_marginLeft="5dp"
+    android:layout_marginRight="5dp"
     android:id="@+id/parentLayout">
 
     <TextView
         android:id="@+id/txtDate"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="18sp"
+        android:gravity="center_horizontal"
+        android:width="105dp"
+        android:background="@drawable/bg_table_content"
         android:padding="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="@string/date" />
-
     <TextView
         android:id="@+id/txtDescription"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:textSize="18sp"
+        android:layout_gravity="top"
+        android:gravity="start"
+        android:width="160dp"
+        android:minHeight="50dp"
+        android:background="@drawable/bg_table_content"
         android:padding="5dp"
         android:text="@string/description" />
-
     <TextView
         android:id="@+id/txtAmount"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_height="match_parent"
+        android:textSize="18sp"
+        android:gravity="start"
+        android:width="100dp"
+        android:background="@drawable/bg_table_content"
         android:padding="5dp"
+        android:paddingTop="10dp"
+        android:paddingBottom="10dp"
         android:text="@string/amount" />
-
 </LinearLayout>
