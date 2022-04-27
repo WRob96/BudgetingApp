@@ -3,7 +3,8 @@
     android:layout_width="wrap_content"
     android:layout_height="wrap_content"
     android:orientation="horizontal"
-    android:gravity="center_horizontal"
+    android:gravity="center"
+    android:layout_gravity="center_horizontal"
     android:layout_marginLeft="5dp"
     android:layout_marginRight="5dp"
     android:id="@+id/parentLayout">
@@ -13,7 +14,7 @@
         android:layout_width="wrap_content"
         android:layout_height="match_parent"
         android:textSize="18sp"
-        android:gravity="center_horizontal"
+        android:gravity="start"
         android:width="105dp"
         android:background="@drawable/bg_table_content"
         android:padding="5dp"
